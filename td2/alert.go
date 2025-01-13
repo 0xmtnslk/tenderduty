@@ -7,6 +7,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"strconv"
 	"strings"
 	"sync"
 	"time"
@@ -27,6 +29,7 @@ type alertMsg struct {
 	message  string
 	uniqueId string
 	key      string
+	valAddress string // Added valAddress field
 
 	tgChannel  string
 	tgKey      string
@@ -325,7 +328,7 @@ func notifyTg(msg *alertMsg) (err error) {
 				l("invalid user ID:", err)
 				continue
 			}
-			
+
 			mc := tgbotapi.NewMessage(uid, fmt.Sprintf("%s: %s - %s", msg.chain, prefix, msg.message))
 			_, err = bot.Send(mc)
 			if err != nil {
@@ -399,6 +402,7 @@ func (c *Config) alert(chainName, message, severity string, resolved bool, id *s
 		message:      message,
 		uniqueId:     uniq,
 		key:          c.Chains[chainName].Alerts.Pagerduty.ApiKey,
+		valAddress:   c.Chains[chainName].ValAddress, // Assign valAddress here
 		tgChannel:    c.Chains[chainName].Alerts.Telegram.Channel,
 		tgKey:        c.Chains[chainName].Alerts.Telegram.ApiKey,
 		tgMentions:   strings.Join(c.Chains[chainName].Alerts.Telegram.Mentions, " "),

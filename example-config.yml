@@ -114,7 +114,6 @@ chains:
       telegram:
         enabled: yes
         api_key: "" # uses default if blank
-        channel: "" # uses default if blank
 
       # Slack settings
       slack:
