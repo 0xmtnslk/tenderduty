@@ -4,5 +4,10 @@
     "username": "oxmtnslk",
     "validator_address": "pellvaloper1zr2cxnrfy0jcfv4x7jgm9adxpz8wxa26wn7ztz",
     "wallet_address": "pell1zr2cxnrfy0jcfv4x7jgm9adxpz8wxa26ujjf47"
+  },
+  "1234567890": {
+    "username": "otheruser", 
+    "validator_address": "othervaloper1address",
+    "wallet_address": "otherwallet1address"
   }
 }

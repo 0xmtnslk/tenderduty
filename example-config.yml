@@ -35,12 +35,9 @@ discord:
 
 # Telegram settings
 telegram:
-  # Alert via telegram? Note: also supersedes chain-specific settings
-  enabled: no
-  # API key ... talk to @BotFather
-  api_key: "5555555555:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-  # The group ID for the chat where messages will be sent. Google how to find this, will include better info later.
-  channel: "-666666666"
+  enabled: yes
+  api_key: "YOUR_BOT_TOKEN"
+  channel: "YOUR_CHANNEL_ID"
 
 # Slack settings
 slack:

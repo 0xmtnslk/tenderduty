@@ -1,6 +1,6 @@
 
 chain_id: "dymension_100-1"
-valoper_address: ""
+valoper_address: "YOUR_VALIDATOR_ADDRESS"
 alerts:
   consecutive_enabled: true
   consecutive_missed: 5
