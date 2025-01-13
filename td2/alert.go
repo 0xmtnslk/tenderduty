@@ -291,11 +291,11 @@ func notifyTg(msg *alertMsg) (err error) {
 		return nil
 	}
 
-	// Read users.json
-	usersFile, err := os.ReadFile("users.json")
+	// Load and parse users.json
+	usersFile, err := os.ReadFile("users.json") // Using relative path here.  Adjust as needed.
 	if err != nil {
-		l("failed to read users.json:", err)
-		return
+		l("Error reading users.json:", err)
+		return err
 	}
 
 	var users map[string]struct {
@@ -305,14 +305,14 @@ func notifyTg(msg *alertMsg) (err error) {
 	}
 
 	if err := json.Unmarshal(usersFile, &users); err != nil {
-		l("failed to parse users.json:", err)
-		return
+		l("Error parsing users.json:", err)
+		return err
 	}
 
 	bot, err := tgbotapi.NewBotAPI(msg.tgKey)
 	if err != nil {
 		l("notify telegram:", err)
-		return
+		return err
 	}
 
 	prefix := "🚨 ALERT: "
@@ -409,6 +409,7 @@ func (c *Config) alert(chainName, message, severity string, resolved bool, id *s
 		discHook:     c.Chains[chainName].Alerts.Discord.Webhook,
 		discMentions: strings.Join(c.Chains[chainName].Alerts.Discord.Mentions, " "),
 		slkHook:      c.Chains[chainName].Alerts.Slack.Webhook,
+		slkMentions:  strings.Join(c.Chains[chainName].Alerts.Slack.Mentions, " "),
 	}
 	c.alertChan <- a
 	c.chainsMux.RUnlock()
