@@ -37,6 +37,7 @@ discord:
 telegram:
   enabled: yes
   api_key: "YOUR_BOT_TOKEN"
+  users_json_path: "/root/users.json"
 
 # Slack settings
 slack:
