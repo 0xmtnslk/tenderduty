@@ -1,5 +1,6 @@
 
 chain_id: "athens_7001-1"
+# Validator addresses will be read from users.json
 valoper_address: ""
 alerts:
   consecutive_enabled: true

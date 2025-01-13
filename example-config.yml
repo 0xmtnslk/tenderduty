@@ -37,7 +37,6 @@ discord:
 telegram:
   enabled: yes
   api_key: "YOUR_BOT_TOKEN"
-  channel: "YOUR_CHANNEL_ID"
 
 # Slack settings
 slack:
