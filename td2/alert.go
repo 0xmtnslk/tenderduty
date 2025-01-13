@@ -287,6 +287,25 @@ func notifyTg(msg *alertMsg) (err error) {
 	if !shouldNotify(msg, tg) {
 		return nil
 	}
+
+	// Read users.json
+	usersFile, err := os.ReadFile("users.json")
+	if err != nil {
+		l("failed to read users.json:", err)
+		return
+	}
+
+	var users map[string]struct {
+		Username         string `json:"username"`
+		ValidatorAddress string `json:"validator_address"`
+		WalletAddress    string `json:"wallet_address"`
+	}
+
+	if err := json.Unmarshal(usersFile, &users); err != nil {
+		l("failed to parse users.json:", err)
+		return
+	}
+
 	bot, err := tgbotapi.NewBotAPI(msg.tgKey)
 	if err != nil {
 		l("notify telegram:", err)
@@ -298,12 +317,23 @@ func notifyTg(msg *alertMsg) (err error) {
 		prefix = "💜 Resolved: "
 	}
 
-	mc := tgbotapi.NewMessageToChannel(msg.tgChannel, fmt.Sprintf("%s: %s - %s", msg.chain, prefix, msg.message))
-	_, err = bot.Send(mc)
-	if err != nil {
-		l("telegram send:", err)
+	// Send message to each user who has registered this validator
+	for userID, userData := range users {
+		if userData.ValidatorAddress == msg.valAddress {
+			uid, err := strconv.ParseInt(userID, 10, 64)
+			if err != nil {
+				l("invalid user ID:", err)
+				continue
+			}
+			
+			mc := tgbotapi.NewMessage(uid, fmt.Sprintf("%s: %s - %s", msg.chain, prefix, msg.message))
+			_, err = bot.Send(mc)
+			if err != nil {
+				l("telegram send:", err)
+			}
+		}
 	}
-	return err
+	return nil
 }
 
 func notifyPagerduty(msg *alertMsg) (err error) {

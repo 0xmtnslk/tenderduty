@@ -1,0 +1,17 @@
+
+chain_id: "dymension_100-1"
+valoper_address: ""
+alerts:
+  consecutive_enabled: true
+  consecutive_missed: 5
+  consecutive_priority: "high"
+  percentage_enabled: true
+  percentage_missed: 10
+  percentage_priority: "high"
+  alert_if_inactive: true
+  alert_if_no_servers: true
+  stalled_enabled: true
+  stalled_minutes: 10
+nodes:
+  - url: "https://dym-dao-rpc.01no.de:443"
+    alert_if_down: true
