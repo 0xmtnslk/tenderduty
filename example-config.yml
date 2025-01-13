@@ -132,3 +132,60 @@ chains:
       # repeat hosts for monitoring redundancy
       - url: https://some-other-node:443
         alert_if_down: no
+
+  "Dymension":
+    chain_id: "dymension_100-1"
+    valoper_address: "dymvaloper1..."
+    public_fallback: yes
+    alerts:
+      stalled_enabled: yes
+      stalled_minutes: 10
+      consecutive_enabled: yes
+      consecutive_missed: 5
+      consecutive_priority: critical
+      percentage_enabled: yes
+      percentage_missed: 10
+      percentage_priority: warning
+      alert_if_inactive: yes
+      alert_if_no_servers: yes
+    nodes:
+      - url: "https://dym-dao-rpc.01no.de:443"
+        alert_if_down: yes
+
+  "ZetaChain":
+    chain_id: "athens_7001-1"
+    valoper_address: "zetavaloper1..."
+    public_fallback: yes
+    alerts:
+      stalled_enabled: yes
+      stalled_minutes: 10
+      consecutive_enabled: yes
+      consecutive_missed: 5
+      consecutive_priority: critical
+      percentage_enabled: yes
+      percentage_missed: 10
+      percentage_priority: warning
+      alert_if_inactive: yes
+      alert_if_no_servers: yes
+    nodes:
+      - url: "https://zetachain-testnet-rpc.publicnode.com:443"
+        alert_if_down: yes
+
+  "Lava":
+    chain_id: "lava-testnet-2"
+    valoper_address: "lavavaloper1..."
+    public_fallback: yes
+    alerts:
+      stalled_enabled: yes
+      stalled_minutes: 10
+      consecutive_enabled: yes
+      consecutive_missed: 5
+      consecutive_priority: critical
+      percentage_enabled: yes
+      percentage_missed: 10
+      percentage_priority: warning
+      alert_if_inactive: yes
+      alert_if_no_servers: yes
+    nodes:
+      - url: "https://lava-testnet-rpc.polkachu.com:443"
+        alert_if_down: yes
